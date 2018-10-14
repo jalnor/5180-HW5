@@ -1,9 +1,12 @@
+/*
+Assignment HW#5
+NewsActivity.java
+Jarrod Norris, Andrew Schlesinger
+ */
+
 package com.example.gameon.hw05;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,8 +86,8 @@ public class NewsActivity extends AppCompatActivity implements GetNewsArticlesAs
     public void progress(int progress) {
         Log.d("ohmy", "This is progress " + progress);
         this.progress = progress;
-        if ( progress == 1 ) {
-            this.dialog.hide();
+        if ( progress == 100 ) {
+            this.dialog.dismiss();
         }
     }
 }

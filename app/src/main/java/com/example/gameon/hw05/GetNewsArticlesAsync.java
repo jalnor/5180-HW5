@@ -1,3 +1,8 @@
+/*
+Assignment HW#5
+GetNewsArticlesAsync.java
+Jarrod Norris, Andrew Schlesinger
+ */
 package com.example.gameon.hw05;
 
 import android.os.AsyncTask;
@@ -47,7 +52,7 @@ public class GetNewsArticlesAsync extends AsyncTask<String, Integer, ArrayList<N
             json = new JSONObject(line);
             arts =  json.getJSONArray("articles");
             arrLength = arts.length();
-            int prog = 0;
+            double prog = 0.0;
             Log.d("ohmy", "The value of arrLength is " + arrLength);
             for ( int i = 0; i < arrLength; i++ ) {
                 News news = new News();
@@ -62,11 +67,9 @@ public class GetNewsArticlesAsync extends AsyncTask<String, Integer, ArrayList<N
                 news.setContent(hLN.getString("content"));
                 Log.d("ohmy", "This is the news object in async " + news.getAuthor());
                 headlines.add(news);
-                if (arrLength != 0 ) {
-                    prog = ( i / arrLength ) * 100;
-                }
-                Log.d("ohmy", "This is prog in getnewsasync " + prog);
-                publishProgress(i);
+                prog = ((i +1) / (double)arrLength) * 100;
+                Log.d("ohmy", "This is prog in getnewsasync " + prog + " " + arrLength + " " + i);
+                publishProgress((int)prog);
             }
 
             return headlines;

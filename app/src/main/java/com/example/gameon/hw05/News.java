@@ -1,3 +1,8 @@
+/*
+Assignment HW#5
+News.java
+Jarrod Norris, Andrew Schlesinger
+ */
 package com.example.gameon.hw05;
 
 import java.io.Serializable;

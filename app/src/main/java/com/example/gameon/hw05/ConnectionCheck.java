@@ -1,3 +1,9 @@
+/*
+Assignment HW#5
+ConnectionCheck.java
+Jarrod Norris, Andrew Schlesinger
+ */
+
 package com.example.gameon.hw05;
 
 

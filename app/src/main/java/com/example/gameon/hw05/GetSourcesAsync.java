@@ -1,3 +1,8 @@
+/*
+Assignment HW#5
+GetSourcesAsync.java
+Jarrod Norris, Andrew Schlesinger
+ */
 package com.example.gameon.hw05;
 
 import android.os.AsyncTask;
@@ -70,8 +75,8 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
                 source.setCountry(src.getString("country"));
                 srcs.add(source);
                 Log.d("Damnit", "This is bullshit " + i + ", " + arrLength + " dividing them " + i/arrLength + " But dividing real numbers 1/4 " + ((int)1 / (int)4) );
-
-                publishProgress(i);
+                prog = ( (i + 1) / (double) arrLength ) * 100;
+                publishProgress((int)prog);
                 Log.d("message", "doInBackground: " + srcs.get(i).getSourceName() + " progress is " + prog);
             }
 

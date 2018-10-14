@@ -1,3 +1,8 @@
+/*
+Assignment HW#5
+WebView.java
+Jarrod Norris, Andrew Schlesinger
+ */
 package com.example.gameon.hw05;
 
 import android.support.v7.app.AlertDialog;
