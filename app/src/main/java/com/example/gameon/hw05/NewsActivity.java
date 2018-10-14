@@ -31,9 +31,10 @@ public class NewsActivity extends AppCompatActivity implements GetNewsArticlesAs
 
         source = (Sources) getIntent().getSerializableExtra("source");
         Log.d("ohmy", "Did we get the url in newsActivity " + source.getUrl());
+        ConnectionCheck cc = new ConnectionCheck(this);
+        Boolean connected = cc.isConn();
 
-
-        if ( isConn() ) {
+        if ( connected ) {
             if ( headlines == null ) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
@@ -48,9 +49,6 @@ public class NewsActivity extends AppCompatActivity implements GetNewsArticlesAs
         } else {
             Toast.makeText(getApplicationContext(), "No internet connection", (Toast.LENGTH_LONG * 100)).show();
         }
-
-
-
     }
 
     public void listNews() {
@@ -88,15 +86,5 @@ public class NewsActivity extends AppCompatActivity implements GetNewsArticlesAs
         if ( progress == 1 ) {
             this.dialog.hide();
         }
-    }
-
-    private boolean isConn() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-
-        if (ni == null || !ni.isConnected() || (ni.getType() != ConnectivityManager.TYPE_WIFI && ni.getType() != ConnectivityManager.TYPE_MOBILE)) {
-            return false;
-        }
-        return true;
     }
 }
