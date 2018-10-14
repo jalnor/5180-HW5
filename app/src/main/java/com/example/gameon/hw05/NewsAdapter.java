@@ -34,7 +34,12 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView title = convertView.findViewById(R.id.tv_title);
         TextView date = convertView.findViewById(R.id.tv_published);
 
-        Picasso.get().load(news.getUrlToImage()).into(image);
+
+        try {
+            Picasso.get().load(news.getUrlToImage()).into(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         author.setText(news.getAuthor());
         title.setText(news.getTitle());
         date.setText(news.getPublishedAt());
