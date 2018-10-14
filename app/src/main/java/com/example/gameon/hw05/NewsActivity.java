@@ -24,7 +24,6 @@ public class NewsActivity extends AppCompatActivity implements GetNewsArticlesAs
 
     ArrayList<News> headlines = null;
     AlertDialog dialog = null;
-    private int progress;
     Sources source;
 
     @Override
@@ -84,8 +83,6 @@ public class NewsActivity extends AppCompatActivity implements GetNewsArticlesAs
 
     @Override
     public void progress(int progress) {
-        Log.d("ohmy", "This is progress " + progress);
-        this.progress = progress;
         if ( progress == 100 ) {
             this.dialog.dismiss();
         }

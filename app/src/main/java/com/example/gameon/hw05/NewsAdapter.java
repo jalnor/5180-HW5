@@ -29,6 +29,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         News news = getItem(position);
+
         ViewHolder vh;
 
         if ( convertView == null ) {

@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements GetSourcesAsync.P
 
     AlertDialog dialog = null;
     ArrayList<Sources> srcs = null;
-    int progress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

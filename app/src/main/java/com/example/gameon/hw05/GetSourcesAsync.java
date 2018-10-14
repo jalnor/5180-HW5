@@ -7,11 +7,9 @@ package com.example.gameon.hw05;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +23,6 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
 
     JSONArray newsSources = new JSONArray();
     ArrayList<Sources> srcs = new ArrayList<>();
-    int progress = 0;
 
     PData pData;
     public GetSourcesAsync(PData pData) {
@@ -39,7 +36,6 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
 
     @Override
     protected void onPostExecute(ArrayList<Sources> sources) {
-        Log.d("Damnit", "This is in the new onpostexec " + sources.get(0).getSourceName());
         pData.passData(sources);
     }
 
@@ -50,7 +46,8 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
         InputStream is = null;
         BufferedReader br = null;
         JSONObject j;
-        int arrLength = 1;
+        int arrLength;
+
         try {
             URL url = new URL(strings[0]);
             huc = (HttpURLConnection) url.openConnection();
@@ -61,8 +58,8 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
             j = new JSONObject(line);
             newsSources = j.getJSONArray("sources");
             arrLength = newsSources.length();
-            Log.d("message", "The value of arrLength is " + arrLength);
             double prog = 0;
+
             for ( int i = 0; i < arrLength; i++ ) {
                 JSONObject src = newsSources.getJSONObject(i);
                 Sources source = new Sources();
@@ -74,16 +71,11 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
                 source.setLanguage(src.getString("language"));
                 source.setCountry(src.getString("country"));
                 srcs.add(source);
-                Log.d("Damnit", "This is bullshit " + i + ", " + arrLength + " dividing them " + i/arrLength + " But dividing real numbers 1/4 " + ((int)1 / (int)4) );
                 prog = ( (i + 1) / (double) arrLength ) * 100;
                 publishProgress((int)prog);
-                Log.d("message", "doInBackground: " + srcs.get(i).getSourceName() + " progress is " + prog);
             }
 
-            Log.d("Damnit", "doInBackground: " + srcs.get(15).getSourceName());
-
             return srcs;
-
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -103,8 +95,6 @@ public class GetSourcesAsync extends AsyncTask<String, Integer, ArrayList<Source
         }
         return null;
     }
-
-
 
     public static interface PData {
         public void passData(ArrayList<Sources> data);

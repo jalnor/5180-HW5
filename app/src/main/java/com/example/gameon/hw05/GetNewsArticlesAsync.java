@@ -7,11 +7,9 @@ package com.example.gameon.hw05;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,11 +51,10 @@ public class GetNewsArticlesAsync extends AsyncTask<String, Integer, ArrayList<N
             arts =  json.getJSONArray("articles");
             arrLength = arts.length();
             double prog = 0.0;
-            Log.d("ohmy", "The value of arrLength is " + arrLength);
+
             for ( int i = 0; i < arrLength; i++ ) {
                 News news = new News();
                 JSONObject hLN = arts.getJSONObject(i);
-//                news.setSrc(hLN.getJSONObject("source").getString("id"));
                 news.setAuthor(hLN.getString("author"));
                 news.setTitle(hLN.getString("title"));
                 news.setDescription(hLN.getString("description"));
@@ -65,10 +62,8 @@ public class GetNewsArticlesAsync extends AsyncTask<String, Integer, ArrayList<N
                 news.setUrlToImage(hLN.getString("urlToImage"));
                 news.setPublishedAt(hLN.getString("publishedAt"));
                 news.setContent(hLN.getString("content"));
-                Log.d("ohmy", "This is the news object in async " + news.getAuthor());
                 headlines.add(news);
                 prog = ((i +1) / (double)arrLength) * 100;
-                Log.d("ohmy", "This is prog in getnewsasync " + prog + " " + arrLength + " " + i);
                 publishProgress((int)prog);
             }
 
