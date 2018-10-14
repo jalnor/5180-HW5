@@ -11,7 +11,9 @@ import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 public class ViewWebPages extends AppCompatActivity {
@@ -28,24 +30,35 @@ public class ViewWebPages extends AppCompatActivity {
         ConnectionCheck cc = new ConnectionCheck(this);
         Boolean connected = cc.isConn();
 
-//        if ( connected ) {
-//            if ( test != null ) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                LayoutInflater inflater = this.getLayoutInflater();
-//
-//                builder.setTitle("Loading").setView(inflater.inflate(R.layout.activity_loading, null));
-//
-//                WebView wv = findViewById(R.id.webView);
-//                wv.loadUrl(test);
-//
-//
-//                this.dialog = builder.create();
-//                this.dialog.show();
-//            }
-//        } else {
-//            Toast.makeText(getApplicationContext(), "No internet connection", (Toast.LENGTH_LONG * 100)).show();
-//        }
+        if ( connected ) {
+            if ( test != null ) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+
+                builder.setTitle("Loading").setView(inflater.inflate(R.layout.activity_loading, null));
+
+                WebView wv = findViewById(R.id.webView);
+                wv.setWebViewClient(new WebClient());
+                WebSettings set = wv.getSettings();
+                set.setJavaScriptEnabled(true);
+                set.setBuiltInZoomControls(true);
+                wv.loadUrl(test);
+
+
+                this.dialog = builder.create();
+                this.dialog.show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "No internet connection", (Toast.LENGTH_LONG * 100)).show();
+        }
         WebView wv = findViewById(R.id.webView);
         wv.loadUrl(test);
+    }
+
+    class WebClient extends WebViewClient {
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
     }
 }
